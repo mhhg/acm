@@ -35,7 +35,7 @@ def is_isomorphic_string(s, t):
             if m[c1] != c2:
                 return False
         else:
-            if c2 in m.values():
+            if c2 in list(m.values()):
                 return False
             m[c1] = c2
 
@@ -93,12 +93,12 @@ def find_kth(k, a, b, s1, s2):
     if m1 < len(a):
         mid1 = a[m1]
     else:
-        mid1 = sys.maxint
+        mid1 = sys.maxsize
 
     if m2 < len(b):
         mid2 = b[m2]
     else:
-        mid2 = sys.maxint
+        mid2 = sys.maxsize
 
     if mid1 < mid2:
         return find_kth(k - k / 2, a, b, m1 + 1, s2)
@@ -228,7 +228,7 @@ class TwoSum(object):
             self.hash_map[num] = 1
 
     def find(self, num):
-        for key, value in self.hash_map.iteritems():
+        for key, value in self.hash_map.items():
             target = num - key
             if target in self.hash_map:
                 if key == target and value < 2:
@@ -254,8 +254,8 @@ def atoi(s):
     if flag == "-":
         res *= -1
 
-    if res > sys.maxint:
-        return sys.maxint
+    if res > sys.maxsize:
+        return sys.maxsize
 
     return res
 
@@ -298,7 +298,7 @@ def sum_4(arr, target):
 
 
 def sum_3_closest(arr, target):
-    m = sys.maxint
+    m = sys.maxsize
     res = 0
     arr = sorted(arr)
     for i, n in enumerate(arr):
@@ -1017,7 +1017,7 @@ def word_pattern(pattern, s):
         if p in data:
             if data[p] != arr[i]:
                 return False
-        elif arr[i] in data.values():
+        elif arr[i] in list(data.values()):
             return False
         data[p] = arr[i]
 
@@ -1106,7 +1106,7 @@ def top_k_frequent_elements(arr, k):
         tmp[x] = 1 if x not in tmp else tmp[x] + 1
 
     result = []
-    for key, val in tmp.iteritems():
+    for key, val in tmp.items():
         if val == k:
             result.append(key)
     return result
@@ -1201,7 +1201,7 @@ def largest_number(nums):
 
 
 def increasing_triplet_subsequence(nums):
-    x, y = sys.maxint, sys.maxint
+    x, y = sys.maxsize, sys.maxsize
 
     for z in nums:
         if x >= z:
@@ -1218,7 +1218,7 @@ def course_schedule(num_courses, prerequisites):
     tmp = dict()
     for x in prerequisites:
         tmp[x[0]] = x[1]
-        if x[0] in tmp.values():
+        if x[0] in list(tmp.values()):
             return False
     return True
 
@@ -1436,7 +1436,7 @@ def longest_increasing_subsequence(nums):
         for j, m in enumerate(nums[:i]):
             if n > m:
                 maximum[i] = max(maximum[i], maximum[j] + 1)
-            print ' ', n, '\t', m, '  \t', n > m, '\t', maximum
+            print(' ', n, '\t', m, '  \t', n > m, '\t', maximum)
     return max(maximum)
 
 
@@ -1446,7 +1446,7 @@ def coin_change(coins, amount):
 
 def perfect_squares(n):
     m = int(math.sqrt(n))
-    dp = [sys.maxint] * (n + 1)
+    dp = [sys.maxsize] * (n + 1)
     for i in range(n):
         for j in range(m):
             if i == j * j:
@@ -1502,7 +1502,7 @@ def substr_concat_all_words(s, words):
     result = []
     for i in range(0, len(s) - l, l):
         if s[i:i + l] in words:
-            print s[i:i + l], i
+            print(s[i:i + l], i)
     return
 
 
@@ -1599,105 +1599,105 @@ def subsets(s):
 # maybe wrong: 153
 
 exit(0)
-print triangle([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]])
-print word_break_two("catsanddog", ["cat", "cats", "and", "sand", "dog"])
-print super_ugly_numbers()
-print is_reachable([1, 2, 3, 4], 21)
-print group_anagrams(["abc", "cba"])
-print substr_concat_all_words("barfoothefoobarman", ["foo", "bar"])
-print combination_sum([2, 3, 6, 7], 7)
-print generate_parentheses(3)
-print perfect_squares(13), perfect_squares(12)
-print longest_increasing_subsequence([10, 9, 2, 15, 16, 7, 101, 18])
-print unique_path(3, 3)
-print min_path_sum([[4, 3, 1, 9], [2, 4, 8, 6], [3, 5, 1, 6], [7, 2, 3, 8]])
-print max_profit_two([3, 1, 5, 3, 6, 4, 5, 1])
-print max_profit([3, 1, 5, 3, 6, 4, 5, 1])
-print jump_game_two([2, 3, 1, 1, 4])
-print jump_game([2, 3, 1, 1, 4]), jump_game([3, 2, 1, 0, 4])
-print house_robber([])
-print palindrome_partitioning("aab")
-print maximum_product_subarray([2, 3, -2, 4])
-print maximum_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4])
-print word_break("leetcode", ["leet", "code"])
-print edit_distance("a", "b"), edit_distance("abd", "def")
-print find_k_pairs_smallest_sums([1, 7, 11], [2, 4, 6], 3)
-print is_ugly_two(10)
-print is_ugly(14), is_ugly(6), is_ugly(8)
-print course_schedule(2, [[1, 0]]), course_schedule(2, [[1, 0], [0, 1]])
-print increasing_triplet_subsequence([1, 2, 3, 4, 5]), \
-    increasing_triplet_subsequence([5, 4, 3, 2, 1])
-print largest_number([3, 30, 34, 5, 9])
-print h_index([3, 0, 6, 1, 5])
-print first_missing_positive([1, 2, 0, 4])
-print find_duplicate_number([1, 2, 2, 3])
-print missing_number([0, 1, 3])
-print contain_nearby_duplicate([12, 78, 500, 21, 65, 5, 46, 52], 3, 13)
-print merge_k_sorted_arrays([[1, 3, 5, 7], [2, 4, 6, 8], [0, 9, 10, 11]])
-print meeting_rooms([[0, 30], [5, 10], [15, 20]])
-print meeting_rooms_two([[15, 16], [11, 14], [17, 22], [1, 24]]), '\n', \
-    meeting_rooms_two([[9, 12], [10, 13], [12, 15], [17, 18], [23, 1]])
-print top_k_frequent_elements([3, 1, 1, 2, 3, 1, 2, 3, 4, 2], 3)
-print shortest_palindrome("aacecaaa"), \
-    shortest_palindrome("abcd")
-print remove_invalid_parentheses("()())()")
-print is_scramble("great", "rgeat")
-print word_pattern("abab", "red blue red blue"), \
+print(triangle([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]))
+print(word_break_two("catsanddog", ["cat", "cats", "and", "sand", "dog"]))
+print(super_ugly_numbers())
+print(is_reachable([1, 2, 3, 4], 21))
+print(group_anagrams(["abc", "cba"]))
+print(substr_concat_all_words("barfoothefoobarman", ["foo", "bar"]))
+print(combination_sum([2, 3, 6, 7], 7))
+print(generate_parentheses(3))
+print(perfect_squares(13), perfect_squares(12))
+print(longest_increasing_subsequence([10, 9, 2, 15, 16, 7, 101, 18]))
+print(unique_path(3, 3))
+print(min_path_sum([[4, 3, 1, 9], [2, 4, 8, 6], [3, 5, 1, 6], [7, 2, 3, 8]]))
+print(max_profit_two([3, 1, 5, 3, 6, 4, 5, 1]))
+print(max_profit([3, 1, 5, 3, 6, 4, 5, 1]))
+print(jump_game_two([2, 3, 1, 1, 4]))
+print(jump_game([2, 3, 1, 1, 4]), jump_game([3, 2, 1, 0, 4]))
+print(house_robber([]))
+print(palindrome_partitioning("aab"))
+print(maximum_product_subarray([2, 3, -2, 4]))
+print(maximum_subarray([-2, 1, -3, 4, -1, 2, 1, -5, 4]))
+print(word_break("leetcode", ["leet", "code"]))
+print(edit_distance("a", "b"), edit_distance("abd", "def"))
+print(find_k_pairs_smallest_sums([1, 7, 11], [2, 4, 6], 3))
+print(is_ugly_two(10))
+print(is_ugly(14), is_ugly(6), is_ugly(8))
+print(course_schedule(2, [[1, 0]]), course_schedule(2, [[1, 0], [0, 1]]))
+print(increasing_triplet_subsequence([1, 2, 3, 4, 5]), \
+    increasing_triplet_subsequence([5, 4, 3, 2, 1]))
+print(largest_number([3, 30, 34, 5, 9]))
+print(h_index([3, 0, 6, 1, 5]))
+print(first_missing_positive([1, 2, 0, 4]))
+print(find_duplicate_number([1, 2, 2, 3]))
+print(missing_number([0, 1, 3]))
+print(contain_nearby_duplicate([12, 78, 500, 21, 65, 5, 46, 52], 3, 13))
+print(merge_k_sorted_arrays([[1, 3, 5, 7], [2, 4, 6, 8], [0, 9, 10, 11]]))
+print(meeting_rooms([[0, 30], [5, 10], [15, 20]]))
+print(meeting_rooms_two([[15, 16], [11, 14], [17, 22], [1, 24]]), '\n', \
+    meeting_rooms_two([[9, 12], [10, 13], [12, 15], [17, 18], [23, 1]]))
+print(top_k_frequent_elements([3, 1, 1, 2, 3, 1, 2, 3, 4, 2], 3))
+print(shortest_palindrome("aacecaaa"), \
+    shortest_palindrome("abcd"))
+print(remove_invalid_parentheses("()())()"))
+print(is_scramble("great", "rgeat"))
+print(word_pattern("abab", "red blue red blue"), \
     word_pattern("aaaa", "asd asd asd asd"), \
-    word_pattern("aabb", "xyz abc xyz abc")
-print flip_game_two("-++-++")
-print flip_game("+++-+-++-++--+-++")
-print get_target_num([1, 2, 3, 4], 21)
-print min_window_sub_str("ADOBECODEBANC", "ABC")
-print longest_sub_str_2_unique_char("abcbbbbcccbdddadacb")
-print longest_sub_str("abcabcbb"), longest_sub_str("bbbbb")
-print palindrome_pairs(["bat", "tab", "cat"])
-print valid_anagram("ali", "ila"), valid_anagram("ali", "ile")
-print largest_rect_histogram([2, 1, 5, 6, 2, 3])
-print search_rotated_sorted_array_two([4, 5, 6, 7, 4, 4, 4], 4)
-print search_rotated_sorted_array([4, 5, 6, 7, 0, 1, 2], 2)
-print guess_number(10 ** 10000)
-print search_range([5, 7, 7, 8, 8, 10], 8)
-print find_min_rotated_sorted_arr_dup([3, 3, 3, 1, 2, 3, 3])
-print find_min_rotated_sorted_arr([4, 5, 6, 7, 0, 1, 2])
+    word_pattern("aabb", "xyz abc xyz abc"))
+print(flip_game_two("-++-++"))
+print(flip_game("+++-+-++-++--+-++"))
+print(get_target_num([1, 2, 3, 4], 21))
+print(min_window_sub_str("ADOBECODEBANC", "ABC"))
+print(longest_sub_str_2_unique_char("abcbbbbcccbdddadacb"))
+print(longest_sub_str("abcabcbb"), longest_sub_str("bbbbb"))
+print(palindrome_pairs(["bat", "tab", "cat"]))
+print(valid_anagram("ali", "ila"), valid_anagram("ali", "ile"))
+print(largest_rect_histogram([2, 1, 5, 6, 2, 3]))
+print(search_rotated_sorted_array_two([4, 5, 6, 7, 4, 4, 4], 4))
+print(search_rotated_sorted_array([4, 5, 6, 7, 0, 1, 2], 2))
+print(guess_number(10 ** 10000))
+print(search_range([5, 7, 7, 8, 8, 10], 8))
+print(find_min_rotated_sorted_arr_dup([3, 3, 3, 1, 2, 3, 3]))
+print(find_min_rotated_sorted_arr([4, 5, 6, 7, 0, 1, 2]))
 words = ["practice", "makes", "perfect", "py", 'makes']
-print shortest_word_distance_three(words, "makes", "makes")
-print shortest_word_distance(words, "coding", "practice"), "\n", \
-    shortest_word_distance(words, "makes", "coding")
-print one_edit_distance("ali", "eli"), one_edit_distance("ali", "mhg")
-print summary_range([0, 1, 2, 4, 5, 7])
-print trap_rain_water([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1])
-print move_zero([0, 1, 0, 3, 12])
-print remove_element([1, 1, 1, 2, 3, 4, 1, 2, 3, 4], 1)
-print remove_duplicate_from_sorted_array_two([1, 1, 1, 2, 2, 3, 4, 4, 4, 5])
-print remove_duplicate_from_sorted_array([1, 1, 2, 3, 4, 4, 4, 5])
-print exercise_1(10)
-print insertion_sort([5, 2, 4, 6, 1, 3])
-print contains_duplicate_two([1, 2, 5, 1, 4], 2), \
-    contains_duplicate_two([1, 2, 1, 7, 5], 2)
-print contains_duplicate([1, 2, 3, 4]), contains_duplicate([1, 2, 3, 1])
-print triangle([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]])
-print length_last_word("hello my friend     ")
-print add_binary_orig("1", "11")
-print add_binary("1", "11")
-print zig_zag_conversion("PAYPALISHIRING", 3), \
-    zig_zag_conversion("PPAYPAASSRIHHSGR", 4)
-print is_valid_palindrome("Red rum, sir, is murder"), \
-    is_valid_palindrome("Programcreek is awesome")
-print longest_consecutive_sequence([100, 4, 200, 1, 3, 2])
+print(shortest_word_distance_three(words, "makes", "makes"))
+print(shortest_word_distance(words, "coding", "practice"), "\n", \
+    shortest_word_distance(words, "makes", "coding"))
+print(one_edit_distance("ali", "eli"), one_edit_distance("ali", "mhg"))
+print(summary_range([0, 1, 2, 4, 5, 7]))
+print(trap_rain_water([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+print(move_zero([0, 1, 0, 3, 12]))
+print(remove_element([1, 1, 1, 2, 3, 4, 1, 2, 3, 4], 1))
+print(remove_duplicate_from_sorted_array_two([1, 1, 1, 2, 2, 3, 4, 4, 4, 5]))
+print(remove_duplicate_from_sorted_array([1, 1, 2, 3, 4, 4, 4, 5]))
+print(exercise_1(10))
+print(insertion_sort([5, 2, 4, 6, 1, 3]))
+print(contains_duplicate_two([1, 2, 5, 1, 4], 2), \
+    contains_duplicate_two([1, 2, 1, 7, 5], 2))
+print(contains_duplicate([1, 2, 3, 4]), contains_duplicate([1, 2, 3, 1]))
+print(triangle([[2], [3, 4], [6, 5, 7], [4, 1, 8, 3]]))
+print(length_last_word("hello my friend     "))
+print(add_binary_orig("1", "11"))
+print(add_binary("1", "11"))
+print(zig_zag_conversion("PAYPALISHIRING", 3), \
+    zig_zag_conversion("PPAYPAASSRIHHSGR", 4))
+print(is_valid_palindrome("Red rum, sir, is murder"), \
+    is_valid_palindrome("Programcreek is awesome"))
+print(longest_consecutive_sequence([100, 4, 200, 1, 3, 2]))
 x = [1, 3, 5, 6]
-print search_insert(x, 5), search_insert(x, 2), search_insert(x, 7), \
-    search_insert(x, 0)
-print min_size_subarray_sum([2, 3, 1, 2, 4, 3], 17)
-print strStr("abcaadfg", "aa"), strStr("abcaadfg", "c")
-print longest_valid_parentheses(")()()())")
-print is_valid("()[]{}"), is_valid("((({}")
-print merge_two_sorted_array([2, 5, 10, 31], [1, 4, 12, 23])
-print sum_3_pointer([-1, 0, 1, 2, -1, 4])
-print sum_3_closest([-1, 2, 1, 4], 1)
-print sum_4([1, 0, -1, 0, -2, 2], 0)
-print sum_3([-1, 0, 1, 2, -1, 4])
-print atoi("123")
+print(search_insert(x, 5), search_insert(x, 2), search_insert(x, 7), \
+    search_insert(x, 0))
+print(min_size_subarray_sum([2, 3, 1, 2, 4, 3], 17))
+print(strStr("abcaadfg", "aa"), strStr("abcaadfg", "c"))
+print(longest_valid_parentheses(")()()())"))
+print(is_valid("()[]{}"), is_valid("((({}"))
+print(merge_two_sorted_array([2, 5, 10, 31], [1, 4, 12, 23]))
+print(sum_3_pointer([-1, 0, 1, 2, -1, 4]))
+print(sum_3_closest([-1, 2, 1, 4], 1))
+print(sum_4([1, 0, -1, 0, -2, 2], 0))
+print(sum_3([-1, 0, 1, 2, -1, 4]))
+print(atoi("123"))
 
 
 def two_sum():
@@ -1705,25 +1705,25 @@ def two_sum():
     x.add(1)
     x.add(3)
     x.add(5)
-    print x.find(4)
-    print x.find(7)
+    print(x.find(4))
+    print(x.find(7))
 
 
 two_sum()
-print sum_2([2, 7, 11, 15], 9)
-print sum_1([2, 7, 11, 15], 9)
-print merge_intervals([[1, 6], [4, 7], [9, 14], [13, 18], [8, 10]])
-print regexp_match("aab", "c*a*b")
-print candy([3, 2, 6, 1, 2, 7, 8, 1])
-print find_kth_largest_elm([4, 1, 5, 3, 34, 2, 55], 2)
-print insert_interval([[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]], [4, 9])
-print find_median_sorted_array([1, 2, 3, 4], [5, 6, 7, 8])
-print word_ladder_1("hit", "cog", ["hot", "dot", "dog", "lot", "log"])
-print word_ladder_1("hit", "cog", ["hot", "dot", "dog", "lot", "log"])
-print is_isomorphic_string("egg", "add"), is_isomorphic_string("foo", "bar")
-print eval_reverse_polish_notation(["2", "1", "+", "3", "*"])
-print reverse_words_string("Hello My Friend")
-print rotate_array(3, [1, 2, 3, 4, 5, 6, 7])
+print(sum_2([2, 7, 11, 15], 9))
+print(sum_1([2, 7, 11, 15], 9))
+print(merge_intervals([[1, 6], [4, 7], [9, 14], [13, 18], [8, 10]]))
+print(regexp_match("aab", "c*a*b"))
+print(candy([3, 2, 6, 1, 2, 7, 8, 1]))
+print(find_kth_largest_elm([4, 1, 5, 3, 34, 2, 55], 2))
+print(insert_interval([[1, 2], [3, 5], [6, 7], [8, 10], [12, 16]], [4, 9]))
+print(find_median_sorted_array([1, 2, 3, 4], [5, 6, 7, 8]))
+print(word_ladder_1("hit", "cog", ["hot", "dot", "dog", "lot", "log"]))
+print(word_ladder_1("hit", "cog", ["hot", "dot", "dog", "lot", "log"]))
+print(is_isomorphic_string("egg", "add"), is_isomorphic_string("foo", "bar"))
+print(eval_reverse_polish_notation(["2", "1", "+", "3", "*"]))
+print(reverse_words_string("Hello My Friend"))
+print(rotate_array(3, [1, 2, 3, 4, 5, 6, 7]))
 
 # not solved:
 
