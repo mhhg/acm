@@ -10,5 +10,18 @@ Given s = "the sky is blue",
 return "blue is sky the".
 */
 func ReverseWords(str string) string {
-	return str
+	result := ""
+	j := 0
+	for i, ch := range str {
+		if ch == ' ' {
+			if j != 0 {
+				result = str[j:i] + " " + result
+			} else {
+				result = str[j:i]
+			}
+			j = i + 1
+		}
+	}
+	result = str[j:] + " " + result
+	return result
 }
