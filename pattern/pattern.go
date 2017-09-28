@@ -14,7 +14,7 @@ func middle(a, b int) int {
 }
 
 // generate valid moves j+1 given a sequence of moves 1..j.
-func nextValid(base []int) []int {
+func next(base []int) []int {
 	x := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
 	if n := len(base); n >= 9 {
 		return nil
@@ -47,7 +47,7 @@ func sequence(base []int) [][]int {
 		return [][]int{base}
 	}
 	x := [][]int{}
-	for _, n := range nextValid(base) {
+	for _, n := range next(base) {
 		base = append(base, n)
 		for _, s := range sequence(base) {
 			x = append(x, s)
