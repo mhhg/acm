@@ -1,13 +1,18 @@
-package main
+package pattern
 
-var minSeqLen = 4
+import "fmt"
+
+var (
+	sequences [][]int
+	min       = 4
+)
 
 // return the node between a and b if there is one, or 0.
 func middle(a, b int) int {
 	if (a+b)%2 != 0 {
 		return 0
 	}
-	if mid := (a + b) / 2; mid == 5 || a%3 == b%3 || (a-1)/3 == (b-1)/3 {
+	if mid := (a + b) / 2; (mid == 5) || (a%3 == b%3) || ((a-1)/3 == (b-1)/3) {
 		return mid
 	}
 	return 0
@@ -22,17 +27,17 @@ func next(base []int) []int {
 		return x
 	}
 	tmp := []int{}
-	for i := range x {
+	for _, i := range x {
 		if !contains(i, base) {
-			mid := middle(i, base[len(base)-1])
-			if mid == 0 || contains(mid, base) {
-				tmp = append(tmp, mid)
+			if mid := middle(i, base[len(base)-1]); mid == 0 || contains(mid, base) {
+				tmp = append(tmp, i)
 			}
 		}
 	}
 	return tmp
 }
 
+// check if array contains a number or not
 func contains(i int, items []int) bool {
 	for _, x := range items {
 		if i == x {
@@ -42,23 +47,36 @@ func contains(i int, items []int) bool {
 	return false
 }
 
-func sequence(base []int) [][]int {
-	if len(base) >= minSeqLen {
-		return [][]int{base}
-	}
-	x := [][]int{}
+// generate valid sequences recursively
+func generate(base []int) {
 	for _, n := range next(base) {
-		base = append(base, n)
-		for _, s := range sequence(base) {
-			x = append(x, s)
-		}
+		s := append(base, n)
+		sequences = append(sequences, s)
+		generate(s)
 	}
-	return x
 }
 
-func main() {
-	seqs := []int{0, 0, 0, 0, 0, 0, 0, 0, 0}
-	for _, s := range sequence([]int{}) {
-		seqs[len(s)] += 1
+// calculate sum of an array
+func sum(arr []int) (s int) {
+	s = 0
+	for _, x := range arr {
+		s += x
 	}
+	return
+}
+
+// count all valid sequence by length and calculate sum of them
+func count() (lengths []int, total int) {
+	sequences = make([][]int, 0)
+	generate([]int{})
+	lengths = []int{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+	for _, s := range sequences {
+		if len(s) >= min {
+			lengths[len(s)]++
+		}
+	}
+	fmt.Println(
+		"length:", lengths,
+		"total:", sum(lengths))
+	return lengths, sum(lengths)
 }
