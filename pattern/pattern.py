@@ -1,5 +1,3 @@
-import sys
-
 min_seq_length = 4
 Seq = list()
 length = [0] * 10
