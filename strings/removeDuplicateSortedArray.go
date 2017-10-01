@@ -12,7 +12,7 @@ func RemoveDuplicate1(arr []int) (int, []int) {
 		if i >= len(arr)-2 {
 			break
 		}
-		if arr[i] == arr[i+1] && arr[i] == arr[i+2] {
+		if arr[i] == arr[i+1] {
 			arr = append(arr[:i], arr[i+1:]...)
 		}
 		i++
