@@ -1,7 +1,7 @@
-import sys
-import re
-from math import log, e
 import math
+import re
+import sys
+from math import e, log
 
 
 def rotate_array(k, i):
