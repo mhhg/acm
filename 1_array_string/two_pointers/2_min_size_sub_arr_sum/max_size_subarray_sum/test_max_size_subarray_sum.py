@@ -10,3 +10,7 @@ class TestMaxSizeSubarraySum(unittest.TestCase):
         nums = [1, -1, 5, -2, 3]
         k = 3
         self.assertEqual(max_size_subarray_sum_eq_k(nums, k), 4)
+
+
+if __name__ == "__main__":
+    unittest.main()
